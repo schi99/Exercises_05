@@ -1,10 +1,9 @@
 # Problem Set 4A
-# Name: <your name here>
+# Name: Benjamin Schibli Heini Jävöri
 # Collaborators:
 # Time Spent: x:xx
 
 from typing import List
-
 
 def get_permutations(sequence):
     '''
@@ -25,9 +24,18 @@ def get_permutations(sequence):
     Note: depending on your implementation, you may return the permutations in
     a different order than what is listed here.
     '''
-    
-    pass  # Remove this and replace with your code here
+    if len(sequence) == 1:
+        return[sequence]
+    else:
+        permutations = []
+        for i in range(len(sequence)):
+            base_letter = sequence[i]
+            other_letters = sequence[:i] + sequence[i+1:]
+            for perm in get_permutations(other_letters):
+                permutations.append(base_letter + perm)
+        return permutations
 
+    
 
 def test_get_permutation(input_sequence: str, expected_output: List):
     """
@@ -57,7 +65,8 @@ def test_get_permutation(input_sequence: str, expected_output: List):
 
 if __name__ == '__main__':
     test_get_permutation('abc', ['abc', 'acb', 'bac', 'bca', 'cab', 'cba'])
-    # Add three example test cases here (for your sanity, limit your inputs
-    # to be three characters or fewer as you will have n! permutations for 
-    # a sequence of length n)
-    pass  # Remove this and replace with your code here
+    test_get_permutation('xyz', ['xyz', 'xzy', 'yxz', 'yzx', 'zxy', 'zyx'])
+    test_get_permutation('ab', ['ab', 'ba'])
+  
+
+  
